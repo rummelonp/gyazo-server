@@ -49,6 +49,16 @@ __END__
   <head>
   <meta charset="utf-8" />
   <title>Gyazo</title>
+  <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js' type='text/javascript'></script>
+  <script src='jquery.MyThumbnail.js' type='text/javascript'></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('img').MyThumbnail({thumbWidth: 200, thumbHeight: 200, backgroundColor: '#fff', imageDivClass: 'pic'});
+    });
+  </script>
+  <style type="text/css">
+    .pic {margin:10px; border-radius:10px; border:1px solid #fff;}
+  </style>
 </head>
 <body>
   <h1>スクリーンショットの瞬間共有</h1>
@@ -58,8 +68,7 @@ __END__
 
 @@index
 <% @images.each do |i| %>
-<a href="<%= i %>">
-  <img src="<%= i %>" />
+<a href="<%= i %>" target="_blank">
+  <img src="<%= i %>"/>
 </a>
-<br />
 <% end %>
