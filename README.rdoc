@@ -1,0 +1,16 @@
+= Gyazo
+
+Gyazo server made with sinatra
+
+== Original
+
+https://github.com/gyazo/Gyazo
+
+Copyright (c) 2009 Toshiyuki Masui
+This software is licensed under the GPL
+
+== Copyright
+
+Copyright (C) 2012 Kazuya Takeshima
+
+Released under the :WTFPL => http://sam.zoy.org/wtfpl
