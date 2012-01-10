@@ -7,7 +7,6 @@ Gyazo server made with sinatra
 https://github.com/gyazo/Gyazo
 
 Copyright (c) 2009 Toshiyuki Masui
-This software is licensed under the GPL
 
 == Copyright
 
