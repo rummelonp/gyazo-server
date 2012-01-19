@@ -40,8 +40,12 @@ module Gyazo
       }.map {|i|
         name = File.basename(i)
         original = "#{settings.image_url}/#{name}"
-        thumb = "#{settings.image_url}/thumb/#{name}"
-        thumb = original unless File.exists?(thumb)
+        thumb_path = "#{settings.public_folder}/thumb/#{name}"
+        if File.exists?(thumb_path)
+          thumb = "#{settings.image_url}/thumb/#{name}"
+        else
+          thumb = original
+        end
         {:original => original, :thumb => thumb}
       }
       erb :index
