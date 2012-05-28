@@ -10,13 +10,16 @@ module Gyazo
   class App < Sinatra::Base
     configure do
       set :gyazo_id, '*** gyazo id ***'
-      set :image_hash_length, 8
+      set :image_hash_length, 3
       set :image_url, '*** image url ***'
       set :inline_templates, true
     end
 
     def hash_from_data(data)
-      Digest::SHA1.hexdigest(data)[0...settings.image_hash_length]
+      begin
+        name = settings.image_hash_length.times.map { rand(36).to_s(36) }.join
+      end while File.exists? "#{settings.public_folder}/#{name}.png"
+      name
     end
 
     def set_data(data)
@@ -28,9 +31,6 @@ module Gyazo
     end
 
     def make_thumb(path)
-      image = Magick::Image.read(path).first
-      image.resize_to_fit!(200, 200)
-      image.write("#{settings.public_folder}/thumb/#{name}.png")
     rescue
     end
 
