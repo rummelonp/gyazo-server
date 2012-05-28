@@ -74,7 +74,9 @@ __END__
     });
   </script>
   <style type="text/css">
-    .pic {margin: 10px; border-radius: 10px;}
+    body { font-family: arial,helvetica,sans-serif; }
+    h1 { margin-left: 10px; text-shadow: #ccc 1px 1px 0px, #ccc 0px 0px 10px, #ccc 0px 0px 10px; }
+    .pic { margin: 10px; border-radius: 10px; box-shadow: #666 0px 0px 6px; }
   </style>
 </head>
 <body>
