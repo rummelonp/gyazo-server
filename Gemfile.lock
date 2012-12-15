@@ -73,7 +73,6 @@ GEM
     method_source (0.8.1)
     mime-types (1.19)
     multi_json (1.5.0)
-    mysql2 (0.3.11)
     polyglot (0.3.3)
     pry (0.9.10)
       coderay (~> 1.0.5)
@@ -150,7 +149,6 @@ DEPENDENCIES
   growl
   guard-livereload
   guard-rspec
-  mysql2
   pry-rails
   rails (= 3.2.9)
   rspec-rails
