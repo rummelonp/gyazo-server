@@ -21,6 +21,10 @@ module Pic
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
+    # Configure the image upload folder & image thumbnail folder
+    config.image_folder     = File.join(Rails.root, 'public', 'images')
+    config.thumbnail_folder = File.join(Rails.root, 'public', 'thumbnails')
+
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
 

@@ -1,6 +1,9 @@
 Pic::Application.routes.draw do
   root :to => "index#index"
 
+  get "images/:name" => "image#image", :as => :image
+  get "thumbnails/:name" => "image#thumbnail", :as => :thumbnail
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
