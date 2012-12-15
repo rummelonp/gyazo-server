@@ -1,0 +1,24 @@
+body {
+  font-family: menlo,arial,helvetica,sans-serif;
+  margin: 20px;
+}
+
+a {
+  color: gray;
+}
+
+header {
+  h1 {
+    margin-left: 10px;
+    font-size: 3em;
+    text-shadow: #ccc 1px 1px 0px, #ccc 0px 0px 10px, #ccc 0px 0px 10px;
+  }
+}
+
+footer {
+  a {
+    margin-left: 20px;
+    font-size: 2em;
+  }
+}
+
