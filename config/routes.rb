@@ -4,6 +4,8 @@ Pic::Application.routes.draw do
   get "images/:name" => "image#image", :as => :image
   get "thumbnails/:name" => "image#thumbnail", :as => :thumbnail
 
+  post "upload/gyazo"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
