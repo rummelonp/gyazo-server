@@ -14,7 +14,7 @@ class Imageable
   end
 
   def mime_type
-    @type ||= self.class.mime_type(name)
+    @mime_type ||= self.class.mime_type(name)
   end
 
   class << self
@@ -47,9 +47,7 @@ class Imageable
     def mime_type(name)
       extname = File.extname(name.to_s).sub('.', '')
       case extname
-      when 'png'
-      when 'gif'
-      when 'jpeg'
+      when 'png', 'gif', 'jpeg'
         "image/#{extname}"
       when 'jpg'
         'image/jpeg'

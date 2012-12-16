@@ -1,20 +1,20 @@
 class ImageController < ApplicationController
   def image
-    image = Image.find(params[:name])
+    image = Image.find(params[:name] + '.' + params[:format])
     send_image_file image
   end
 
   def thumbnail
-    thumbnail = Thumbnail.find(params[:name])
+    thumbnail = Thumbnail.find(params[:name] + '.' + params[:format])
     send_image_file thumbnail
   end
 
   private
   def send_image_file(imageable)
     send_file(
-      imageable.path,
+      imageable.realpath,
       :type => imageable.mime_type,
-      :disposition => :inline,
+      :disposition => 'inline',
     )
   end
 end
