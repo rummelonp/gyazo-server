@@ -22,9 +22,9 @@ class Image < Imageable
 
   def make_thumbnail!
     @thumbnail = Thumbnail.new(name)
-    image = Magick::Image.read(realpath).first
-    image = image.resize_to_fill(150, 150)
-    image.write(@thumbnail.realpath)
+    images = Magick::ImageList.new(realpath)
+    images.each { |f| f.resize_to_fill!(150, 150) }
+    images.write(@thumbnail.realpath)
     @thumbnail
   end
 
