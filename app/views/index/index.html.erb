@@ -1,5 +1,5 @@
 <section class="pictures">
 <% @images.each do |image| %>
-  <%= link_to(image_tag(image.thumbnail_path), image.path, :target => '_blank') %>
+  <%= link_to(image_tag(image.thumbnail_path), image.path) %>
 <% end %>
 </section>

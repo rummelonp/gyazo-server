@@ -7,3 +7,5 @@ $(document).ready ->
     thumbWidth: 150
     thumbHeight: 150
     imageDivClass: 'picture'
+
+  $('a').attr('target', '_blank')
