@@ -31,7 +31,7 @@ class Image < Imageable
   class << self
     def create(data)
       begin
-        name = 3.times.map { rand(36).to_s(36) }.join + '.png'
+        name = 3.times.map { rand(36).to_s(36) }.join
       end while File.exists?(File.join(folder, name))
       image = new(name)
       open(image.realpath, 'wb') { |f| f.print data }

@@ -1,8 +1,5 @@
 class Imageable
-  attr_reader :realpath
-  attr_reader :path
   attr_reader :name
-  attr_reader :type
 
   def initialize(name)
     @name = name
