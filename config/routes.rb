@@ -1,8 +1,8 @@
 Pic::Application.routes.draw do
   root :to => "index#index"
 
-  get "images/:name" => "image#image", :as => :image
-  get "thumbnails/:name" => "image#thumbnail", :as => :thumbnail
+  get ":name" => "image#image", :as => :image
+  get "t/:name" => "image#thumbnail", :as => :thumbnail
 
   post "upload/gyazo"
 

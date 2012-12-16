@@ -2,6 +2,6 @@ class Thumbnail < Imageable
   self.folder = Rails.configuration.thumbnail_folder
 
   def path
-    "/thumbnails/#{name}"
+    "/t/#{name}"
   end
 end
