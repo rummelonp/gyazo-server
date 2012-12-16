@@ -29,9 +29,10 @@ class Image < Imageable
   end
 
   class << self
-    def create(data)
+    def create(data, filename)
+      extname = File.extname(filename)
       begin
-        name = 3.times.map { rand(36).to_s(36) }.join
+        name = 3.times.map { rand(36).to_s(36) }.join + extname
       end while File.exists?(File.join(folder, name))
       image = new(name)
       open(image.realpath, 'wb') { |f| f.print data }

@@ -1,9 +1,10 @@
 class UploadController < ApplicationController
   def gyazo
-    unless params[:imagedata]
+    data = params[:imagedata]
+    unless data
       raise "Image Data Not Found."
     end
-    image = Image.create(params[:imagedata].read)
+    image = Image.create(data.read, data.original_filename)
     url = "#{request.protocol}#{request.host_with_port}#{image.path}"
     render :text => url
   rescue => e
