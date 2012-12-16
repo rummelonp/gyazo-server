@@ -1,0 +1,2 @@
+class ImageableError < StandardError
+end

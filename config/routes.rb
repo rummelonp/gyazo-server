@@ -6,6 +6,8 @@ Pic::Application.routes.draw do
 
   post "upload/gyazo"
 
+  match "*a" => "error#not_found", :as => :not_found
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

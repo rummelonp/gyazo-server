@@ -1,0 +1,2 @@
+class ImageableNotFound < ImageableError
+end

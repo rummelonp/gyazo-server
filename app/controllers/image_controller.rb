@@ -1,11 +1,19 @@
 class ImageController < ApplicationController
   def image
-    image = Image.find(params[:name] + '.' + params[:format])
+    name = "#{params[:name]}.#{params[:format].to_s}"
+    image = Image.find(name)
+    unless image
+      raise ImageableNotFound.new('Image Not Found.')
+    end
     send_image_file image
   end
 
   def thumbnail
-    thumbnail = Thumbnail.find(params[:name] + '.' + params[:format])
+    name = "#{params[:name]}.#{params[:format].to_s}"
+    thumbnail = Thumbnail.find(name)
+    unless thumbnail
+      raise ImageableNotFound.new('Thumbnail Not Found.')
+    end
     send_image_file thumbnail
   end
 
