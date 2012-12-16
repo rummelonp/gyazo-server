@@ -1,6 +1,7 @@
 source :rubygems
 
 gem 'rails', '3.2.9'
+gem 'rmagick', :require => 'RMagick'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
