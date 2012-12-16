@@ -1,8 +1,8 @@
 Pic::Application.routes.draw do
   root :to => "index#index"
 
-  get ":name" => "image#image", :as => :image
-  get "t/:name" => "image#thumbnail", :as => :thumbnail
+  get ":name.:format" => "image#image", :format => /(png|gif|jpe?g)/, :as => :image
+  get "t/:name.:format" => "image#thumbnail", :format => /(png|gif|jpe?g)/, :as => :thumbnail
 
   post "upload/gyazo"
 
