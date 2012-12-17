@@ -1,5 +1,8 @@
 class UploadController < ApplicationController
   def gyazo
+    if Rails.env.production? && params[:id] != Rails.configuration.gyazo_id
+      raise ImageableError.new('Gyazo ID is Incorrect.')
+    end
     data = params[:imagedata]
     unless data
       raise ImageableError.new('Image Data Not Found.')
