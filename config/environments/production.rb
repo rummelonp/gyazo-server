@@ -61,4 +61,8 @@ Pic::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
+  private_config_path = "#{Rails.root}/config/environments/production.private.rb"
+  if File.exists?(private_config_path)
+    require private_config_path
+  end
 end

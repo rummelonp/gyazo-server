@@ -25,6 +25,9 @@ module Pic
     config.image_folder     = File.join(Rails.root, 'public', 'images')
     config.thumbnail_folder = File.join(Rails.root, 'public', 'thumbnails')
 
+    # Configure the id to use upload
+    config.gyazo_id = nil
+
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
 
