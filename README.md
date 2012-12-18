@@ -4,8 +4,10 @@ Gyazo Server made with Ruby on Rails
 
 ## Features
 
-* Support multiple images upload by drag & drop.
-* Resize GIF animation.
+* Using file system. (not using database.)
+* Multiple images upload by drag & drop.
+* Support gif & jpg.
+* Resize gif animation.
 
 ## Dependency
 
