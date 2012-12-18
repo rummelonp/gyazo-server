@@ -66,15 +66,15 @@ GyazoServer::Application.config.secret_token = '*** your secret token ***'
 Configure the image upload folder & gyazo id.
 
 ```sh
-mv config/environments/production.private.rb.sample config/environments/production.private.rb
+cp config/environments/production.private.rb.sample config/environments/production.private.rb
 vim config/environments/production.private.rb
 ```
 
 ```ruby
 GyazoServer::Application.configure do
   # Configure the image upload folder & image thumbnail folder
-  config.image_folder     = '*** image folder ***'
-  config.thumbnail_folder = '*** tumbnail folder ***'
+  config.image_folder     = '/path/to/pictures'
+  config.thumbnail_folder = '/path/to/pictures/t'
 
   # Configure the id to use upload
   config.gyazo_id = '*** your gyazo id ***'
