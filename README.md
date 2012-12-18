@@ -6,14 +6,46 @@ Gyazo Server made with Ruby on Rails
 
 * ImageMagick
 
+### Mac
+
+```sh
+brew install imagemagick
+```
+
+### Ubuntu
+
+```sh
+sudo apt-get install imagemagick libmagick++-dev
+```
+
 ## Installation
 
 ```sh
+git clone git@github.com:mitukiii/gyazo-server.git
 git submodule init
 git submodule update
 ```
 
-### Server Configuration
+### Gyazo Client Configuration
+
+Configure the host, port & gyazo id to use upload.
+
+```sh
+cp Gyazo/Gyazo.app/Contents/Resources/config.private.rb.sample Gyazo/Gyazo.app/Contents/Resources/config.private.rb
+vim Gyazo/Gyazo.app/Contents/Resources/config.private.rb
+```
+
+```ruby
+class Gyazo
+  module Config
+    HOST     = '*** your host ***'
+    PORT     = 80
+    GYAZO_ID = '*** your gyazo id ***'
+  end
+end
+```
+
+### Gyazo Server Configuration
 
 Set secret token.
 
@@ -44,23 +76,65 @@ Pic::Application.configure do
 end
 ```
 
-### Client Configuration
+## Nginx & Unicorn Configuration Sample
 
-Configure the host, port & gyazo id to use upload.
+Send static files directly from Nginx.  
+And, to error page using Ruby on Rails.
 
-```sh
-cp Gyazo/Gyazo.app/Contents/Resources/config.private.rb.sample Gyazo/Gyazo.app/Contents/Resources/config.private.rb
-vim Gyazo/Gyazo.app/Contents/Resources/config.private.rb
+```conf
+upstream unicorn.pic.example.com {
+    server unix:/tmp/unicorn.pic.example.com.sock;
+}
+server {
+    listen 80;
+    server_name pic.example.com;
+    root /var/www/example.com/pic;
+
+    error_page 404 /404;
+
+    access_log /var/log/nginx/pic.example.com.access.log;
+    error_log /var/log/nginx/pic.example.com.error.log;
+
+    location / {
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_pass http://unicorn.pic.example.com;
+    }
+
+    location = /favicon.ico {
+    }
+
+    location = /robots.txt {
+    }
+
+    location ~ \.(png|gif|jp?eg)$ {
+        root /path/to/pictures;
+
+        gzip_static on;
+        expires     max;
+        add_header  Cache-Control public;
+    }
+
+    location ~ ^/(assets|images|javascripts|stylesheets|system)/ {
+        gzip_static on;
+        expires     max;
+        add_header  Cache-Control public;
+    }
+}
 ```
 
 ```ruby
-class Gyazo
-  module Config
-    HOST     = '*** your host ***'
-    PORT     = 80
-    GYAZO_ID = '*** your gyazo id ***'
-  end
-end
+# -*- coding: utf-8 -*-
+
+worker_processes 3
+
+listen '/tmp/unicorn.pic.example.com.sock'
+
+pid '/tmp/unicorn.pic.example.com.pid'
+
+stderr_path 'log/unicorn.log'
+stdout_path 'log/unicorn.log'
 ```
 
 ## Contributing
