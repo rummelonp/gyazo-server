@@ -1,4 +1,4 @@
-Pic::Application.configure do
+GyazoServer::Application.configure do
   # Configure the image upload folder & image thumbnail folder
   config.image_folder     = '/var/pic/images'
   config.thumbnail_folder = '/var/pic/images/t'

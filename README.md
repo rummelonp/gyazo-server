@@ -55,7 +55,7 @@ vim config/initializers/secret_token.rb
 ```
 
 ```ruby
-Pic::Application.config.secret_token = '*** your secret token ***'
+GyazoServer::Application.config.secret_token = '*** your secret token ***'
 ```
 
 Configure the image upload folder & gyazo id.
@@ -66,7 +66,7 @@ vim config/environments/production.private.rb
 ```
 
 ```ruby
-Pic::Application.configure do
+GyazoServer::Application.configure do
   # Configure the image upload folder & image thumbnail folder
   config.image_folder     = '*** image folder ***'
   config.thumbnail_folder = '*** tumbnail folder ***'

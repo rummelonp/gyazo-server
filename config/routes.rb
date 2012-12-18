@@ -1,4 +1,4 @@
-Pic::Application.routes.draw do
+GyazoServer::Application.routes.draw do
   root :to => "index#index"
 
   get ":name.:format" => "image#image", :format => /(png|gif|jpe?g)/, :as => :image

@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Pic::Application.load_tasks
+GyazoServer::Application.load_tasks
