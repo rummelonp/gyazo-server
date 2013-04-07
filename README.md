@@ -115,7 +115,7 @@ server {
     location = /robots.txt {
     }
 
-    location ~ \.(png|gif|jp?eg)$ {
+    location ~ \.(png|gif|jpe?g)$ {
         root /path/to/pictures;
 
         gzip_static on;
