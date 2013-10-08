@@ -1,14 +1,14 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.13'
+gem 'rails', '4.0.0'
 
-gem 'rmagick', :require => 'RMagick'
+gem 'rmagick', require: 'RMagick'
 
 group :assets do
-  gem 'sass-rails', '~> 3.2'
-  gem 'therubyracer', '~> 0.11'
-  gem 'coffee-rails', '~> 3.2'
-  gem 'uglifier', '~> 1.3'
+  gem 'sass-rails'
+  gem 'coffee-rails'
+  gem 'therubyracer'
+  gem 'uglifier'
 end
 
 group :development do
@@ -21,4 +21,3 @@ end
 group :development, :test do
   gem 'rspec-rails'
 end
-
