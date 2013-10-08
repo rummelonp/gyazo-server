@@ -14,6 +14,6 @@ class UploadController < ApplicationController
       logger.info e
     end
     url = "#{request.protocol}#{request.host_with_port}#{image.path}"
-    render :text => url
+    render text: url
   end
 end

@@ -21,8 +21,8 @@ class ImageController < ApplicationController
   def send_image_file(imageable)
     send_file(
       imageable.realpath,
-      :type => imageable.mime_type,
-      :disposition => 'inline',
+      type: imageable.mime_type,
+      disposition: 'inline',
     )
   end
 end

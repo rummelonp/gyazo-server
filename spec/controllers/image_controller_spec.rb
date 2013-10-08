@@ -11,7 +11,7 @@ describe ImageController do
   describe "GET 'image'" do
     it "returns http success" do
       Image.stub(:find).with('jiro.jpg').and_return(Image.new('jiro.jpg'))
-      get 'image', :name => 'jiro', :format => 'jpg'
+      get 'image', name: 'jiro', format: 'jpg'
       response.should be_success
     end
   end
@@ -19,7 +19,7 @@ describe ImageController do
   describe "GET 'thumbnail'" do
     it "returns http success" do
       Thumbnail.stub(:find).with('jiro.jpg').and_return(Thumbnail.new('jiro.jpg'))
-      get 'thumbnail', :name => 'jiro', :format => 'jpg'
+      get 'thumbnail', name: 'jiro', format: 'jpg'
       response.should be_success
     end
   end
