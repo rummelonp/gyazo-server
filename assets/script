@@ -1,0 +1,76 @@
+#!/usr/bin/env ruby
+
+require 'net/http'
+require 'tempfile'
+
+class GyazoClient
+  ID   = '*** id ***'
+  HOST = '*** host ***'
+  PORT = 80
+  CGI  = '/upload/gyazo'
+  UA   = 'Gyazo/2.0'
+
+  def initialize(args)
+    @program = args.shift
+    @files = args
+  end
+
+  def start
+    if @files.empty?
+      data, basename = capture
+      upload(data, basename)
+    else
+      @files.each do |file|
+        data = IO.read(file)
+        basename = File.basename(file)
+        upload(data, basename)
+      end
+    end
+  end
+
+  def capture
+    path = File.join(Dir.tmpdir, "capture#{$$}.png")
+    `screencapture -i "#{path}"`
+    `sips -d profile --deleteColorManagementProperties "#{path}"`
+    if File.exists?(path)
+      data = File.read(path)
+      basename = File.basename(path)
+      File.delete(path)
+      [data, basename]
+    else
+      exit 1
+    end
+  end
+
+  def upload(data, basename)
+    boundary = '----BOUNDARY----'
+    content = <<EOF
+--#{boundary}\r
+content-disposition: form-data; name="id"\r
+\r
+#{ID}\r
+--#{boundary}\r
+content-disposition: form-data; name="imagedata"; filename="#{basename}"\r
+\r
+#{data}\r
+--#{boundary}--\r
+EOF
+    header ={
+      'Content-Length' => content.length.to_s,
+      'Content-type' => "multipart/form-data; boundary=#{boundary}",
+      'User-Agent' => UA
+    }
+    Net::HTTP.start(HOST, PORT) do |http|
+      response = http.post(CGI, content, header)
+      url = response.response.body
+      `echo #{url} | pbcopy`
+      `open #{url}`
+    end
+  end
+
+  def self.start(args)
+    new(args).start
+  end
+end
+
+GyazoClient.start(ARGV)
