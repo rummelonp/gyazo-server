@@ -1,5 +1,8 @@
 <section class="pictures">
-<% @images.each do |image| %>
-  <%= link_to(image_tag(image.thumbnail_path), image.path) %>
-<% end %>
+  <% @images.each do |image| %>
+    <%= link_to(image.path, rel: "external") do %>
+      <%= image_tag("clear.png", class: "picture hide", size: "150x150", data: {original: image.thumbnail_path}) %>
+      <noscript><%= image_tag(image.thumbnail_path, class: "picture") %></noscript>
+    <% end %>
+  <% end %>
 </section>

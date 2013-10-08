@@ -1,25 +1,30 @@
 body {
-  font-family: menlo,arial,helvetica,sans-serif;
   margin: 20px 30px;
   padding: 0;
+  background-color: #ecf0f1;
+  color: #222;
+  font-family: 'Lucida Grande', 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', Meiryo, メイリオ, sans-serif;
 }
 
 header {
   h1 {
     margin-left: 10px;
     font-size: 3em;
-    text-shadow: #ccc 1px 1px 0px, #ccc 0px 0px 10px, #ccc 0px 0px 10px;
-    a {
-      color: black;
-      text-decoration: none;
-    }
   }
+}
+
+a {
+  color: black;
+  text-decoration: none;
 }
 
 .pictures {
   .picture {
-    margin: 10px;
-    border-radius: 5px;
-    box-shadow: #333 0px 0px 6px;
+    margin: 5px;
+    border-radius: 20px;
   }
+}
+
+.hide {
+  display: none;
 }

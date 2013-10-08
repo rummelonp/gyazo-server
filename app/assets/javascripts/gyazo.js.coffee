@@ -2,9 +2,11 @@ $(document).ready ->
   $('h1').jaticker
     leaveCursor: true
 
-  $('img').MyThumbnail
-    thumbWidth: 150
-    thumbHeight: 150
-    imageDivClass: 'picture'
+  $img = $('img')
+  lazyload = ->
+    $($img.splice(0, 1)).show().lazyload(effect: 'fadeIn')
+    unless $img.length == 0
+      setTimeout lazyload, 50
+  setTimeout lazyload, 0
 
-  $('a').attr('target', '_blank')
+  $('a[rel="external"]').attr('target', '_blank')

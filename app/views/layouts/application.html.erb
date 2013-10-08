@@ -4,16 +4,13 @@
     <meta charset="utf-8" />
     <link rel="shortcut icon" href="/favicon.ico" />
     <title>スクリーンショットの瞬間共有</title>
-    <!--[if IE]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
     <%= javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" %>
     <%= javascript_include_tag "application" %>
     <%= stylesheet_link_tag    "application", :media => "all" %>
   </head>
   <body>
     <header>
-      <h1><a href="https://github.com/mitukiii/gyazo-server">スクリーンショットの<ruby>瞬間<rt>しゅんかん</rt></ruby><ruby>共有<rt>きょうゆう</rt></ruby></a></h1>
+      <h1><a href="https://github.com/mitukiii/gyazo-server" rel="external">スクリーンショットの<ruby>瞬間<rt>しゅんかん</rt></ruby><ruby>共有<rt>きょうゆう</rt></ruby></a></h1>
     </header>
     <%= yield %>
   </body>
