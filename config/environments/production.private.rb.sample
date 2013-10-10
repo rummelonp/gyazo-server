@@ -1,8 +1,0 @@
-GyazoServer::Application.configure do
-  # Configure the image upload folder & image thumbnail folder
-  config.image_folder     = '/var/pic/images'
-  config.thumbnail_folder = '/var/pic/images/t'
-
-  # Configure the id to use upload
-  config.gyazo_id = '*** id ***'
-end

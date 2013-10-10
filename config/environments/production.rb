@@ -1,6 +1,13 @@
 GyazoServer::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # Configure the image upload folder & image thumbnail folder
+  config.image_folder     = 'YOUR IMAGE FOLDER'
+  config.thumbnail_folder = 'YOUR THUMBNAIL FOLDER'
+
+  # Configure the id to use upload
+  config.gyazo_id = 'YOUR GYAZO ID'
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 

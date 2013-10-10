@@ -4,8 +4,8 @@ require 'net/http'
 require 'tempfile'
 
 class GyazoClient
-  ID   = '*** id ***'
-  HOST = '*** host ***'
+  ID   = 'YOUR GYAZO ID'
+  HOST = 'YOUR HOST'
   PORT = 80
   CGI  = '/images'
   UA   = 'Gyazo/2.0'

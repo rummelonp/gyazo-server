@@ -37,8 +37,3 @@ module GyazoServer
     # config.i18n.default_locale = :de
   end
 end
-
-begin
-  load "#{File.dirname(__FILE__)}/environments/#{Rails.env}.private.rb"
-rescue LoadError
-end
