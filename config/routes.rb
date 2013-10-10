@@ -1,14 +1,14 @@
 GyazoServer::Application.routes.draw do
-  root :to => 'index#index'
+  root :to => 'images#index'
 
-  scope module: :image do
-    get '/:name.:format' => :image, format: /(png|gif|jpe?g)/
-    get '/t/:name.:format' => :thumbnail, format: /(png|gif|jpe?g)/
+  scope module: :images do
+    get  '/:name.:format' => :show, format: /png|gif|jpe?g/
+    post '/images'        => :create
   end
 
-  scope module: :upload do
-    post '/upload/gyazo' => :gyazo
+  scope module: :thumbnails do
+    get '/t/:name.:format' => :show, format: /png|gif|jpe?g/
   end
 
-  get '*a' => 'error#not_found'
+  match '*a' => 'application#not_found', via: [:get, :post, :put, :delete]
 end

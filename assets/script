@@ -7,7 +7,7 @@ class GyazoClient
   ID   = '*** id ***'
   HOST = '*** host ***'
   PORT = 80
-  CGI  = '/upload/gyazo'
+  CGI  = '/images'
   UA   = 'Gyazo/2.0'
 
   def initialize(args)
