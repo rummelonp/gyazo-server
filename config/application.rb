@@ -22,7 +22,7 @@ module GyazoServer
     config.thumbnail_folder = File.join(Rails.root, 'public', 'thumbnails')
 
     # Configure the id to use upload
-    config.gyazo_id = nil
+    config.gyazo_id = false
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

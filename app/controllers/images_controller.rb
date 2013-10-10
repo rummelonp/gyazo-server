@@ -1,5 +1,8 @@
 class ImagesController < ApplicationController
-  before_filter :authenticate!,  only: [:create, :destroy]
+  if Rails.configuration.gyazo_id
+    before_filter :authenticate!,  only: [:create, :destroy]
+  end
+
   before_filter :require_images, only: :index
   before_filter :require_image,  only: [:show, :destroy]
 
@@ -30,7 +33,7 @@ class ImagesController < ApplicationController
   private
 
   def authenticate!
-    if Rails.env.production? && params[:id] != Rails.configuration.gyazo_id
+    if params[:id] != Rails.configuration.gyazo_id
       raise Imageable::UploadError.new, 'ID is incorrect'
     end
   end
