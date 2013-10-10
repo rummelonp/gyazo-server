@@ -4,10 +4,10 @@ Gyazo Server made with Ruby on Rails
 
 ## Features
 
-* Using file system. (not using database.)
-* Multiple images upload by drag & drop.
-* Support gif & jpg.
-* Resize gif animation.
+* Using file system (Not using database)
+* Delete uploaded image
+* Support gif & jpg
+* Resize gif animation
 
 ## Dependency
 
@@ -29,64 +29,40 @@ sudo apt-get install imagemagick libmagick++-dev
 
 ```sh
 git clone git@github.com:mitukiii/gyazo-server.git
-git submodule init
-git submodule update
 ```
 
 ### Gyazo Client Configuration
 
-Configure the host, port & gyazo id to use upload.
+Configure the host, port & gyazo id to use upload
 
 ```sh
-cp Gyazo/Gyazo.app/Contents/Resources/config.private.rb.sample Gyazo/Gyazo.app/Contents/Resources/config.private.rb
-vim Gyazo/Gyazo.app/Contents/Resources/config.private.rb
-```
-
-```ruby
-class Gyazo
-  module Config
-    HOST     = '*** your host ***'
-    PORT     = 80
-    GYAZO_ID = '*** your gyazo id ***'
-  end
-end
+cat assets/script \
+    | sed 's/YOUR HOST/pic.example.jp/' \
+    | sed 's/YOUR GYAZO ID/yourid/' \
+    > /Applications/Gyazo.app/Contents/Resources/script
 ```
 
 ### Gyazo Server Configuration
 
-Set secret token.
+Set secret key
 
 ```sh
-rake secret
-vim config/initializers/secret_token.rb
+sed -i '' -e "s/YOUR SECRET KEY/$(rake secret)/" config/initializers/secret_token.rb
 ```
 
-```ruby
-GyazoServer::Application.config.secret_token = '*** your secret token ***'
-```
-
-Configure the image upload folder & gyazo id.
+Configure the image upload folder & gyazo id
 
 ```sh
-cp config/environments/production.private.rb.sample config/environments/production.private.rb
-vim config/environments/production.private.rb
-```
-
-```ruby
-GyazoServer::Application.configure do
-  # Configure the image upload folder & image thumbnail folder
-  config.image_folder     = '/path/to/pictures'
-  config.thumbnail_folder = '/path/to/pictures/t'
-
-  # Configure the id to use upload
-  config.gyazo_id = '*** your gyazo id ***'
-end
+sed -i '' -e 's|YOUR IMAGE FOLDER|/var/images|' \
+    -e 's|YOUR THUMBNAIL FOLDER|/var/images/t|' \
+    -e 's|YOUR GYAZO ID|yourid|' \
+    config/environments/production.rb
 ```
 
 ## Nginx & Unicorn Configuration Sample
 
-Send static files directly from Nginx.  
-And, to error page using Ruby on Rails.
+Send static files directly from Nginx
+And, to error page using Ruby on Rails
 
 ```conf
 upstream unicorn.pic.example.com {
@@ -109,21 +85,23 @@ server {
         proxy_pass http://unicorn.pic.example.com;
     }
 
-    location = /favicon.ico {
-    }
+    location = /favicon.ico {}
+    location = /robots.txt {}
 
-    location = /robots.txt {
-    }
-
-    location ~ \.(png|gif|jpe?g)$ {
-        root /path/to/pictures;
-
+    location ~ ^/assets/ {
         gzip_static on;
         expires     max;
         add_header  Cache-Control public;
     }
 
-    location ~ ^/(assets|images|javascripts|stylesheets|system)/ {
+    location ~ \.(png|gif|jpe?g)$ {
+        if ($request_method = DELETE) {
+            proxy_pass http://unicorn.pic.example.com;
+            break;
+        }
+
+        root /var/images;
+
         gzip_static on;
         expires     max;
         add_header  Cache-Control public;
