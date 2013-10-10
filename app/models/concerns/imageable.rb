@@ -77,4 +77,15 @@ module Imageable
   def mime_type
     @mime_type ||= self.class.mime_type(name)
   end
+
+  def destroy!
+    File.delete(realpath)
+    true
+  end
+
+  def destroy
+    destroy!
+  rescue
+    false
+  end
 end

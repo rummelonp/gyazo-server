@@ -1,6 +1,7 @@
 class ImagesController < ApplicationController
+  before_filter :authenticate!,  only: [:create, :destroy]
   before_filter :require_images, only: :index
-  before_filter :require_image, only: :show
+  before_filter :require_image,  only: [:show, :destroy]
 
   def index
   end
@@ -10,9 +11,6 @@ class ImagesController < ApplicationController
   end
 
   def create
-    if Rails.env.production? && params[:id] != Rails.configuration.gyazo_id
-      raise Imageable::UploadError.new, 'ID is incorrect'
-    end
     image = Image.create!(params[:imagedata])
     begin
       image.make_thumbnail!
@@ -23,7 +21,19 @@ class ImagesController < ApplicationController
     render text: url
   end
 
+  def destroy
+    @image.destroy!
+    @image.thumbnail.try(:destroy!)
+    render text: 'ok'
+  end
+
   private
+
+  def authenticate!
+    if Rails.env.production? && params[:id] != Rails.configuration.gyazo_id
+      raise Imageable::UploadError.new, 'ID is incorrect'
+    end
+  end
 
   def require_images
     @images = Image.all

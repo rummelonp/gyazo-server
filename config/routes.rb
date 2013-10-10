@@ -2,8 +2,9 @@ GyazoServer::Application.routes.draw do
   root :to => 'images#index'
 
   scope module: :images do
-    get  '/:name.:format' => :show, format: /png|gif|jpe?g/
-    post '/images'        => :create
+    get    '/:name.:format' => :show,    format: /png|gif|jpe?g/
+    delete '/:name.:format' => :destroy, format: /png|gif|jpe?g/
+    post   '/images'        => :create
   end
 
   scope module: :thumbnails do
