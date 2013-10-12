@@ -8,7 +8,7 @@ class Image
   end
 
   def self.create!(data)
-    unless data.is_a?(ActionDispatch::Http::UploadedFile)
+    unless data.respond_to?(:read) && data.respond_to?(:original_filename)
       raise Imageable::UploadError.new, 'Image data not found'
     end
     extname = File.extname(data.original_filename).sub('.', '')
