@@ -1,3 +1,6 @@
+#= require jquery.jaticker
+#= require jquery.lazyload
+
 $(document).ready ->
   $('h1').jaticker
     leaveCursor: true
