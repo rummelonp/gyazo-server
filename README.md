@@ -134,4 +134,4 @@ stdout_path 'log/unicorn.log'
 
 Copyright (c) 2012 [Kazuya Takeshima](mailto:mail@mitukiii.jp). See [LICENSE][] for details.
 
-[license]: https://github.com/mitukiii/gyazo-server/blob/master/LICENSE.md
+[license]: LICENSE.md
