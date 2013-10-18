@@ -17,7 +17,6 @@ group :development, :test do
 
   # Guard
   gem 'guard-rspec'
-  gem 'guard-livereload'
 
   # Notification
   gem 'growl'
