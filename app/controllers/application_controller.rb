@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::Base
-  rescue_from StandardError, with: :render_server_error
-  rescue_from Imageable::Error, with: :render_client_error
-  rescue_from Imageable::NotFound, with: :render_imageable_not_found
+  rescue_from StandardError,          with: :render_server_error
+  rescue_from Imageable::Error,       with: :render_client_error
+  rescue_from Imageable::NotFound,    with: :render_imageable_not_found
+  rescue_from Imageable::UploadError, with: :render_imageable_upload_error
 
   def not_found
     render status: 404, template: 'errors/not_found.html.erb'
@@ -25,5 +26,10 @@ class ApplicationController < ActionController::Base
     logger.error e
     @message = e.message
     render status: 500, template: 'errors/server_error.html.erb'
+  end
+
+  def render_imageable_upload_error(e)
+    logger.error e
+    render status: 403, text: e.message
   end
 end

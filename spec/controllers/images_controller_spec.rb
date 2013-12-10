@@ -41,7 +41,7 @@ describe ImagesController do
     context 'invalid image data' do
       it "should be bad request" do
         post 'create', imagedata: nil
-        response.should be_bad_request
+        response.code.should == '403'
       end
     end
 
@@ -60,7 +60,7 @@ describe ImagesController do
       context 'invalid id' do
         it "should be bad request" do
           post 'create', id: 'invalidid', imagedata: fixture_file_upload(temp_image_dir + '/' + 'jiro.jpg')
-          response.should be_bad_request
+          response.code.should == '403'
         end
       end
     end
@@ -93,7 +93,7 @@ describe ImagesController do
       context 'invalid id' do
         it "should be bad request" do
           delete 'destroy', id: 'invalidid', name: 'jiro', format: 'jpg'
-          response.should be_bad_request
+          response.code.should == '403'
         end
       end
     end
