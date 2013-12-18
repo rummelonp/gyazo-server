@@ -32,6 +32,15 @@ class GyazoClient
     path = File.join(Dir.tmpdir, "capture#{$$}.png")
     `screencapture -i "#{path}"`
     `sips -d profile --deleteColorManagementProperties "#{path}"`
+    dpi_width    = `sips -g dpiWidth "#{path}" | awk '/:/ {print $2}'`
+    dpi_height   = `sips -g dpiHeight "#{path}" | awk '/:/ {print $2}'`
+    if dpi_width.to_f > 72.0 && dpi_height.to_f > 72.0
+      pixel_width  = `sips -g pixelWidth "#{path}" | awk '/:/ {print $2}'`
+      pixel_height = `sips -g pixelHeight "#{path}" | awk '/:/ {print $2}'`
+      width  = pixel_width.to_f * 72.0 / dpi_width.to_f
+      height = pixel_height.to_f* 72.0 / dpi_height.to_f
+      `sips -s dpiWidth 72 -s dpiHeight 72 -z #{height} #{width} "#{path}"`
+    end
     if File.exists?(path)
       data = File.read(path)
       basename = File.basename(path)
