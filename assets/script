@@ -21,6 +21,7 @@ class GyazoClient
       upload(data, basename)
     else
       @files.each do |file|
+        reduction(file)
         data = IO.read(file)
         basename = File.basename(file)
         upload(data, basename)
@@ -32,6 +33,18 @@ class GyazoClient
     path = File.join(Dir.tmpdir, "capture#{$$}.png")
     `screencapture -i "#{path}"`
     `sips -d profile --deleteColorManagementProperties "#{path}"`
+    reduction(path)
+    if File.exists?(path)
+      data = IO.read(path)
+      basename = File.basename(path)
+      File.delete(path)
+      [data, basename]
+    else
+      exit 1
+    end
+  end
+
+  def reduction(path)
     dpi_width    = `sips -g dpiWidth "#{path}" | awk '/:/ {print $2}'`
     dpi_height   = `sips -g dpiHeight "#{path}" | awk '/:/ {print $2}'`
     if dpi_width.to_f > 72.0 && dpi_height.to_f > 72.0
@@ -40,14 +53,6 @@ class GyazoClient
       width  = pixel_width.to_f * 72.0 / dpi_width.to_f
       height = pixel_height.to_f* 72.0 / dpi_height.to_f
       `sips -s dpiWidth 72 -s dpiHeight 72 -z #{height} #{width} "#{path}"`
-    end
-    if File.exists?(path)
-      data = File.read(path)
-      basename = File.basename(path)
-      File.delete(path)
-      [data, basename]
-    else
-      exit 1
     end
   end
 
